@@ -10,6 +10,11 @@ services:
     volumes:
       - ./storage:/data/db
     restart: always
+    healthcheck:
+      test: ["CMD", "mongo", "--eval", "db.adminCommand('ping')"]
+      interval: 5s
+      timeout: 30s
+      retries: 5
 
   mongo-express:
     image: mongo-express:0.54
@@ -21,5 +26,19 @@ services:
       ME_CONFIG_MONGODB_ENABLE_ADMIN: "true"
       ME_CONFIG_BASICAUTH_USERNAME: admin
       ME_CONFIG_BASICAUTH_PASSWORD: admin
-    links:
-      - "mongo"
+    depends_on:
+      mongo:
+        condition: service_healthy
+
+  app:
+    container_name: cobalt-backend
+    build: .
+    ports:
+      - "5000:5000"
+    environment:
+      FLASK_ENV: development
+    depends_on:
+      mongo:
+        condition: service_healthy
+    volumes:
+      - .:/app
