@@ -16,7 +16,26 @@ if server == "localhost":
 else:
     client = MongoClient(server, username=username, password=password, port=port)
 
+# pour la bdd mongodb => 1 collection users =
+'''
+dans la collection users, un user contient: 
+un id, un email, un nom, un prenom, un password, un user_token
+'''
+
+# 1 collection produits
+'''
+dans la collection produits, un produit contient: 
+un id, un titre, une description, un prix, une quantité (la quantité total du produit en stockage)
+'''
+# 1 collection commandes_users
+'''
+dans la collection commande_users, une commande contient: 
+un id, un user_id, les produits_id, quantite_sel
+'''
 # faire le docker-compose etc...
+# faire en sorte de vérifier le jwt de l'user avec le token de l'user dans la de bdd mongodb,
+# le back génère le jwt à l'inscription de l'user, donc 1 user 1 token qui permet de vérifier que le compte de l'user lui appartient bien.
+# a la connexion on vérifie le jwt
 
 app.config['JWT_SECRET_KEY'] = 'web2'
 jwt = JWTManager(app)
@@ -28,12 +47,12 @@ users = [
 
 @app.route('/connexion', methods=['POST'])
 def connexion():
-    username = request.form['username']
+    email = request.form['email']
     password = request.form['password']
 
     for user in users:
-        if user['username'] == username and user['password'] == password:
-            access_token = create_access_token(identity=username)
+        if user['email'] == username and user['password'] == password:
+            access_token = create_access_token(identity=email)
             print(access_token)
             response = make_response(render_template('index.html'))
             response.set_cookie('access_token', access_token)
@@ -71,7 +90,7 @@ def app():
 @app.route('/app/produit',methods=['GET'])
 @jwt_required()
 def produit():
-    return "prduit = img + titre + prix + descr + quantité"
+    return "on va chercher le prduit donc l'img + titre + prix + descr + quantité dans la bdd (collection produits"
 
 @app.route('/app/quantite',methods=['GET'])
 @jwt_required()
