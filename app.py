@@ -4,7 +4,7 @@ from pymango import MongoClient
 
 app = Flask(__name__)
 
-# tout rajouter dans un .env
+# tout rajouter dans un .env si on veux un projet plus propre
 server = "mongodb://localhost:27017/"
 username = "cobaltDB"
 password = ""
