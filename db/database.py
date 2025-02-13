@@ -250,8 +250,8 @@ def initialize_database():
             },
             {
                 "id": "26",
-                "titre": "Elegant and Retro Watch",
-                "description": "Elevate your style with this elegant and retro leather watch, a masterpiece of vintage-inspired design. Its rich brown leather strap and intricate dial details make it a standout piece for any occasion. Perfect for the sophisticated gentleman who values both style and substance, this watch is more than a timepiece—it’s a statement. Wear it proudly and let it reflect your refined taste.",
+                "titre": "Vintage Edition  Watch",
+                "description": "Elevate your style with this elegant and retro leather watch, a masterpiece of vintage-inspired design. This is a Vintage Edition. Its rich brown leather strap and intricate dial details make it a standout piece for any occasion. Perfect for the sophisticated gentleman who values both style and substance, this watch is more than a timepiece—it’s a statement. Wear it proudly and let it reflect your refined taste.",
                 "prix": 499.99,
                 "quantite": 12,
                 "image_url": "https://maison-fevre.fr/cdn/shop/products/bracelet-montre-retro-cuir-marron-homme-maison-fevre-fait-main_900x.jpg?v=1725021036",
@@ -259,7 +259,7 @@ def initialize_database():
             },
             {
                 "id": "27",
-                "titre": "Elegant and Retro Watch",
+                "titre": "Elegant Watch",
                 "description": "Make a statement with this elegant and retro leather watch, a timeless piece for the modern gentleman. Its vintage-inspired design and rich brown leather strap make it the perfect accessory for any occasion. Whether you're at a business meeting or a casual gathering, this watch is the ultimate statement piece. For the man who values classic style with a modern twist, this watch is a true investment.",
                 "prix": 599.99,
                 "quantite": 12,
