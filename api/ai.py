@@ -30,17 +30,20 @@ class IA(Resource):
         description_tfidf = tfidf_analyse[1:]
         Newcorrelation = 0
 
+        BestMatch = None
+
         for id, doc in enumerate(description_tfidf):
             correlation = pearsonr(demande_tfidf, doc)
             if correlation[0] > Newcorrelation:
                 Newcorrelation = correlation[0]
                 BestMatch = id
+            
 
         if BestMatch is not None:
             resultat = "Voici lequel de nos bijoux correspondrait le mieux à votre demande : " + descriptions[BestMatch]
             return {'resultat': resultat}, 200
         else:
-            return {'resultat': 'Aucun match trouvé.'}, 404
+            return {'resultat': 'Malheureusement, les précisions actuelles ne sont pas suffisantes pour effectuer une recherche appropriée. Peux-tu me donner de nouvelles précisions ?'}, 404
 
 def init_ia_routes(api):
     api.add_namespace(ia_ns)
