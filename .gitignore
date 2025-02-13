@@ -1,5 +1,3 @@
-# Ignorer le dossier storage
-/storage/
 
 # Ignorer les fichiers de configuration sensible
 .env
