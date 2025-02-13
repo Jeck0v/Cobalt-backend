@@ -1,6 +1,47 @@
-.venv
-.vscode
-.idea
+# Ignorer le dossier storage
+/storage/
 
-
+# Ignorer les fichiers de configuration sensible
 .env
+*.env
+
+# Ignorer les fichiers de dépendances (pour Python)
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.pyc
+*.pyo
+*.pyd
+*.db
+*.sqlite3
+
+
+# Ignorer les fichiers de dépendances (pour d'autres langages)
+vendor/
+bin/
+*.gem
+*.rbc
+*.sassc
+.sass-cache/
+*.lock
+*.log
+*.tmp
+*.swp
+*.swo
+*.DS_Store
+*.idea/
+*.vscode/
+
+
+# Ignorer les fichiers de cache
+.cache/
+*.cache
+
+# Ignorer les fichiers de logs
+*.log
+logs/
+
+# Ignorer les fichiers temporaires
+*.tmp
+temp/
