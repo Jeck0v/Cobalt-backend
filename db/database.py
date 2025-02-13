@@ -62,7 +62,7 @@ def initialize_database():
                 "description": "Bague en or massif, dans un style à la fois moderne et contemporain.",
                 "prix": 82.99,
                 "quantite": 20,
-                "image_url": "https://cdn-media.glamira.com/media/product/newgeneration/view/1/sku/8381feratibes/alloycolour/yellow.jpg"
+                "image_url": "https://www.histoiredor.com/dw/image/v2/BCQS_PRD/on/demandware.static/-/Sites-THOM_CATALOG/default/dw8fffcd27/images/B3HMJW0120-master.jpg?sw=474&sh=474"
             },
             {
                 "id": "6",
@@ -150,7 +150,7 @@ def initialize_database():
                 "description": "Bague en or massif, dans un style à la fois moderne et contemporain.",
                 "prix": 96.99,
                 "quantite": 20,
-                "image_url": "https://cdn-media.glamira.com/media/product/newgeneration/view/1/sku/8381feratibes/alloycolour/yellow.jpg"
+                "image_url": "https://www.histoiredor.com/dw/image/v2/BCQS_PRD/on/demandware.static/-/Sites-THOM_CATALOG/default/dw8fffcd27/images/B3HMJW0120-master.jpg?sw=474&sh=474"
             },
             {
                 "id": "17",
@@ -198,7 +198,7 @@ def initialize_database():
                 "description": "Bague en or massif, dans un style à la fois moderne et contemporain.",
                 "prix": 140.99,
                 "quantite": 20,
-                "image_url": "https://cdn-media.glamira.com/media/product/newgeneration/view/1/sku/8381feratibes/alloycolour/yellow.jpg"
+                "image_url": "https://www.histoiredor.com/dw/image/v2/BCQS_PRD/on/demandware.static/-/Sites-THOM_CATALOG/default/dw8fffcd27/images/B3HMJW0120-master.jpg?sw=474&sh=474"
             },
             {
                 "id": "23",
@@ -262,7 +262,7 @@ def initialize_database():
                 "description": "Bague en or massif, dans un style à la fois moderne et contemporain.",
                 "prix": 129.99,
                 "quantite": 20,
-                "image_url": "https://cdn-media.glamira.com/media/product/newgeneration/view/1/sku/8381feratibes/alloycolour/yellow.jpg"
+                "image_url": "https://www.histoiredor.com/dw/image/v2/BCQS_PRD/on/demandware.static/-/Sites-THOM_CATALOG/default/dw8fffcd27/images/B3HMJW0120-master.jpg?sw=474&sh=474"
             },
             {
                 "id": "31",
