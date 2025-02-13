@@ -1,5 +1,8 @@
 flask
-flask-jwt-extended
-pymongo
 flask-restx
-flask_cors
+pymongo
+scikit-learn
+scipy
+flask-jwt-extended
+flask-cors
+python-dotenv

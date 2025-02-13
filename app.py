@@ -4,6 +4,7 @@ from db.database import db
 from api.auth import init_auth_routes
 from api.products import init_products_routes
 from api.orders import init_orders_routes
+from api.ai import init_ia_routes
 from flask_jwt_extended import JWTManager
 from flask_cors import CORS
 
@@ -27,6 +28,7 @@ api = Api(
 init_auth_routes(api)
 init_products_routes(api)
 init_orders_routes(api)
+init_ia_routes(api)
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000, debug=True)
