@@ -2,3 +2,4 @@ flask
 flask-jwt-extended
 pymongo
 flask-restx
+flask_cors
