@@ -15,11 +15,17 @@ class IA(Resource):
     @ia_ns.expect(ia_model)
     def post(self):
         """
-        IA
+        IA pour la recommandation de produits
         """
         requete = request.json.get('demande')
 
-        descriptions = [doc["description"] for doc in db.products.find({}, {"description": 1})]
+        products = list(db.products.find({}, {"description": 1, "titre": 1, "id": 1}))
+        descriptions = [doc["description"] for doc in products]
+        titres = [doc["titre"] for doc in products]
+        product_ids = [doc["id"] for doc in products]
+
+        if not descriptions:
+            return {'resultat': 'Aucun produit disponible pour le moment.'}, 404
 
         ensemble = [requete] + descriptions
 
@@ -32,15 +38,20 @@ class IA(Resource):
 
         BestMatch = None
 
+
         for id, doc in enumerate(description_tfidf):
             correlation = pearsonr(demande_tfidf, doc)
             if correlation[0] > Newcorrelation:
                 Newcorrelation = correlation[0]
                 BestMatch = id
-            
 
         if BestMatch is not None:
-            resultat = "Voici lequel de nos bijoux correspondrait le mieux à votre demande : " + descriptions[BestMatch]
+            product_id = product_ids[BestMatch]
+            product_titre = titres[BestMatch]
+
+            product_link = f"/products/{product_id}"
+
+            resultat = f"Voici lequel de nos bijoux correspondrait le mieux à votre demande : {product_titre}. Vous pouvez le consulter ici : {product_link}"
             return {'resultat': resultat}, 200
         else:
             return {'resultat': 'Malheureusement, les précisions actuelles ne sont pas suffisantes pour effectuer une recherche appropriée. Peux-tu me donner de nouvelles précisions ?'}, 404
