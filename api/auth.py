@@ -69,7 +69,7 @@ class Login(Resource):
         else:
             return {"msg": "Bad username or password"}, 401
 
-@auth_ns.route('/modify')
+@auth_ns.route('/modifyAccount')
 class Modify(Resource):
     @jwt_required()
     @auth_ns.expect(user_model)
@@ -81,16 +81,37 @@ class Modify(Resource):
         """
         Aemail = get_jwt_identity()
         
-
         data = request.get_json()
         firstname = data.get('firstname')
         name = data.get('name')
-        password = data.get('password')
         email = data.get('email')
 
         user = db.users.find_one({"email": Aemail})
         if user:
-            db.users.update_one({"email": Aemail}, {"$set": {"firstname": firstname, "name": name, "password": password, "email": email}})
+            db.users.update_one({"email": Aemail}, {"$set": {"firstname": firstname, "name": name, "email": email}})
+            return {"msg": "User modified"}, 200
+        else:
+            return {"msg": "No user connected"}, 401
+
+
+@auth_ns.route('/modifyPassword')
+class Modify(Resource):
+    @jwt_required()
+    @auth_ns.expect(user_model)
+    @auth_ns.response(200, 'Utilisateur modifié')
+    @auth_ns.response(401, 'Utilisateur non connecté')
+    def put(self):
+        """
+        Modifier les informations de l'utilisateur connecté
+        """
+        Aemail = get_jwt_identity()
+        
+        data = request.get_json()
+        password = data.get('password')
+
+        user = db.users.find_one({"email": Aemail})
+        if user:
+            db.users.update_one({"email": Aemail}, {"$set": {"password": password}})
             return {"msg": "User modified"}, 200
         else:
             return {"msg": "No user connected"}, 401
