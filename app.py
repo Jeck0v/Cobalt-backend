@@ -5,8 +5,10 @@ from api.auth import init_auth_routes
 from api.products import init_products_routes
 from api.orders import init_orders_routes
 from flask_jwt_extended import JWTManager
+from flask_cors import CORS
 
 app = Flask(__name__)
+CORS(app)
 
 app.config['JWT_SECRET_KEY'] = 'web2'
 jwt = JWTManager(app)
