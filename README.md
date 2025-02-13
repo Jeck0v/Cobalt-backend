@@ -1,38 +1,42 @@
 
 # <p align="center">Cobalt e-commerce PWA - Back-end</p>
   
+## Start the app:
 
-- Front-end en React
-- Back-end en Flask
+- Front-end in React
+- Back-end in Flask
 - BDD MongoDB
-- Swagger pour les tests des routes
+- Swagger UI
 
 
-Clone le projet
+Clone the project:
 
 ```bash
 git clone https://github.com/Jeck0v/Cobalt-backend.git
 ```
-Lancer l'app avec le docker-compose.
+Stating app with:
 
 ```bash
 docker compose up --build
 ```
-
-Pour tester les routes vous pouvez aller sur : <br>
+For Swagger: <br>
 http://localhost:5000/swagger/
 
-Pour voir Mongo-Express: <br>
+For Mongo-Express: <br>
 http://localhost:8081/
 
 The db is only initialized in the `express-mongo` when the request is received, so when a user creates an account,  the request creates the db with the user collection.
 
 
-### Issues:
+## How to fix the known error:
 
 If you have mongo `dependency failed to start: container mongo is unhealthy`.
-Please make this:
-suppr the storage folder
+Please make this: <br>
+ ```bash
+docker compose down --v 
+```
+ + suppr the `storage` folder
+
  ```bash
 docker compose up --build
 ```
