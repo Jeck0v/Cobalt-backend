@@ -3,6 +3,7 @@ from flask_restx import Api
 from db.database import db
 from api.auth import init_auth_routes
 from api.products import init_products_routes
+from api.shopcart import init_shopping_cart_routes
 from api.orders import init_orders_routes
 from flask_jwt_extended import JWTManager
 from flask_cors import CORS
@@ -26,6 +27,8 @@ api = Api(
 
 init_auth_routes(api)
 init_products_routes(api)
+init_orders_routes(api)
+init_shopping_cart_routes(api)
 init_orders_routes(api)
 
 if __name__ == '__main__':
