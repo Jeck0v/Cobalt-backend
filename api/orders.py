@@ -1,13 +1,12 @@
 from flask import request
 from flask_restx import Namespace, Resource, fields
-from flask_jwt_extended import jwt_required, get_jwt_identity  # Import JWT
+from flask_jwt_extended import jwt_required, get_jwt_identity
 from db.database import db
-from api.shopcart import cart_item_model  # Importer le modèle du panier
+from api.shopcart import cart_item_model
 
-# Namespace commandes
+
 orders_ns = Namespace('orders', description='Opérations liées aux commandes')
 
-# Modèle Swagger pour une commande
 order_model = orders_ns.model('Order', {
     'user_email': fields.String(required=True, description='Email de l\'utilisateur'),
     'cart_items': fields.List(fields.Nested(cart_item_model)),
@@ -18,14 +17,13 @@ order_model = orders_ns.model('Order', {
 @orders_ns.route('/<string:user_id>')
 class UserOrders(Resource):
     @orders_ns.marshal_list_with(order_model)
-    @jwt_required()  # Protéger la route avec JWT
+    @jwt_required()
     def get(self, user_id):
         """
         Récupérer les commandes validées d'un utilisateur
         """
-        current_user_email = get_jwt_identity()  # Récupérer l'email de l'utilisateur connecté
+        current_user_email = get_jwt_identity()
 
-        # Vérifier que l'utilisateur connecté accède à ses propres commandes
         if current_user_email != user_id:
             return {"msg": "Unauthorized access to orders"}, 403
 
@@ -35,7 +33,7 @@ class UserOrders(Resource):
 @orders_ns.route('/<string:order_id>')
 class OrderDetail(Resource):
     @orders_ns.marshal_with(order_model)
-    @jwt_required()  # Protéger la route avec JWT
+    @jwt_required()
     def get(self, order_id):
         """
         Récupérer les détails d'une commande validée
@@ -44,9 +42,8 @@ class OrderDetail(Resource):
         if not order:
             return {"msg": "Order not found or not validated"}, 404
 
-        current_user_email = get_jwt_identity()  # Récupérer l'email de l'utilisateur connecté
+        current_user_email = get_jwt_identity()
 
-        # Vérifier que l'utilisateur connecté accède à sa propre commande
         if current_user_email != order['user_email']:
             return {"msg": "Unauthorized access to order"}, 403
 
@@ -54,14 +51,13 @@ class OrderDetail(Resource):
 
 @orders_ns.route('/<string:user_id>/total')
 class OrderTotal(Resource):
-    @jwt_required()  # Protéger la route avec JWT
+    @jwt_required()
     def get(self, user_id):
         """
         Calculer le prix total des commandes validées d'un utilisateur
         """
-        current_user_email = get_jwt_identity()  # Récupérer l'email de l'utilisateur connecté
+        current_user_email = get_jwt_identity()
 
-        # Vérifier que l'utilisateur connecté accède à ses propres commandes
         if current_user_email != user_id:
             return {"msg": "Unauthorized access to orders"}, 403
 
