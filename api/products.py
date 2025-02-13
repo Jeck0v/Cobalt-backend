@@ -2,15 +2,15 @@ from flask import request
 from flask_restx import Namespace, Resource, fields
 from db.database import db
 
-# namespace routes products
+# Namespace produits
 products_ns = Namespace('products', description='Opérations liées aux produits')
 
-# Model Product Swagger
+# Model Swagger product
 product_model = products_ns.model('Product', {
     'id': fields.String(required=True, description='ID du produit'),
     'titre': fields.String(required=True, description='Titre du produit'),
     'description': fields.String(required=True, description='Description du produit'),
-    'categorie': fields.String(required=True, description='categorie du produit'),
+    'categorie': fields.String(required=True, description='Catégorie du produit'),
     'prix': fields.Float(required=True, description='Prix du produit'),
     'quantite': fields.Integer(required=True, description='Quantité disponible en stock'),
     'image_url': fields.String(description='URL de l\'image du produit')
@@ -109,7 +109,7 @@ class ProductDetail(Resource):
     @products_ns.response(404, 'Produit non trouvé')
     def get(self, product_id):
         """
-        recup produit par ID
+        Récupérer un produit par ID
         """
         product = db.products.find_one({"id": product_id})
         if product:
@@ -117,8 +117,33 @@ class ProductDetail(Resource):
         else:
             return {"msg": "Product not found"}, 404
 
+@products_ns.route('/categories')
+class Categories(Resource):
+    @products_ns.response(200, 'Catégories trouvées')
+    def get(self):
+        """
+        Récupérer toutes les catégories disponibles
+        """
+        categories = db.products.distinct("categorie")
+        return {"categories": categories}, 200
+
+@products_ns.route('/products/<string:category>')
+class ProductsByCategory(Resource):
+    @products_ns.marshal_list_with(product_model)
+    @products_ns.response(200, 'Produits trouvés')
+    @products_ns.response(404, 'Aucun produit trouvé pour cette catégorie')
+    def get(self, category):
+        """
+        Récupérer les produits par catégorie
+        """
+        products = list(db.products.find({"categorie": category}))
+        if products:
+            return products, 200
+        else:
+            return {"msg": f"No products found for category '{category}'"}, 404
+
 def init_products_routes(api):
     """
-    init routes API
+    Initialiser les routes API
     """
     api.add_namespace(products_ns)
