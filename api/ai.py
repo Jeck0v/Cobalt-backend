@@ -51,10 +51,10 @@ class IA(Resource):
 
             product_link = f"/products/{product_id}"
 
-            resultat = f"Voici lequel de nos bijoux correspondrait le mieux à votre demande : {product_titre}. Vous pouvez le consulter ici : {product_link}"
+            resultat = f"Here's which of our jewels would best suit your request: {product_titre}. You can find it here: {product_link}"
             return {'resultat': resultat}, 200
         else:
-            return {'resultat': 'Malheureusement, les précisions actuelles ne sont pas suffisantes pour effectuer une recherche appropriée. Peux-tu me donner de nouvelles précisions ?'}, 404
+            return {'resultat': 'Unfortunately, the current details are not sufficient to carry out a proper search. Can you give me some more details?'}, 404
 
 def init_ia_routes(api):
     api.add_namespace(ia_ns)
