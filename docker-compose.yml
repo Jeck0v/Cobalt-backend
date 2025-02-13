@@ -43,11 +43,14 @@ services:
     volumes:
       - .:/app
 
-  nginx_flask:
-    image: nginx
-    expose:
+  nginx:
+    image: nginx:latest
+    container_name: nginx_proxy
+    ports:
       - "80:80"
     volumes:
-      - ./code:/usr/share/nginx/html
-    ports:
-      - 80:80
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./nginx/conf.d:/etc/nginx/conf.d:ro
+    depends_on:
+      - app
+      - mongo-express
