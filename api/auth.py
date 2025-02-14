@@ -22,6 +22,20 @@ login_model = auth_ns.model('Login', {
     'password': fields.String(required=True, description='Mot de passe de l\'utilisateur')
 })
 
+# model pour modifier le mot de passe pour Swagger
+modifyL_model = auth_ns.model('Login', {
+    'password': fields.String(required=True, description='Mot de passe de l\'utilisateur')
+})
+
+# model pour modifier les données de l'utilisateur pour Swagger
+modifyA_model = auth_ns.model('User', {
+    '_id': fields.String(description='ID unique de l\'utilisateur'),
+    'firstname': fields.String(required=True, description='Prénom de l\'utilisateur'),
+    'name': fields.String(required=True, description='Nom de l\'utilisateur'),    'email': fields.String(required=True, description='Email de l\'utilisateur')
+})
+
+
+
 @auth_ns.route('/register')
 class Register(Resource):
     @auth_ns.expect(user_model)
@@ -72,7 +86,7 @@ class Login(Resource):
 @auth_ns.route('/modifyAccount')
 class ModifyAccount(Resource):
     @jwt_required()
-    @auth_ns.expect(user_model)
+    @auth_ns.expect(modifyA_model)
     @auth_ns.response(200, 'Utilisateur modifié')
     @auth_ns.response(401, 'Utilisateur non connecté')
     def put(self):
@@ -97,7 +111,7 @@ class ModifyAccount(Resource):
 @auth_ns.route('/modifyPassword')
 class ModifyPassword(Resource):
     @jwt_required()
-    @auth_ns.expect(user_model)
+    @auth_ns.expect(modifyL_model)
     @auth_ns.response(200, 'Utilisateur modifié')
     @auth_ns.response(401, 'Utilisateur non connecté')
     def put(self):
