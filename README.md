@@ -30,7 +30,7 @@ The db is only initialized in the `express-mongo` when the request is received, 
 
 ## How to fix the known error:
 
-If you have mongo `dependency failed to start: container mongo is unhealthy` or any error from `storage`:
+If you have mongo `dependency failed to start: container mongo is unhealthy` or any error from `storage`: <br>
 Please make this: <br>
  ```bash
 docker compose down -v 
