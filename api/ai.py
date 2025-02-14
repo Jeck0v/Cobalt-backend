@@ -9,7 +9,6 @@ ia_ns = Namespace('ia', description='Opérations liées à l\'utilisation de l\'
 ia_model = ia_ns.model('IA', {
     'demande': fields.String(required=True, description='Demande de l\'utilisateur')
 })
-
 @ia_ns.route('/search')
 class IA(Resource):
     @ia_ns.expect(ia_model)
@@ -38,7 +37,6 @@ class IA(Resource):
 
         BestMatch = None
 
-
         for id, doc in enumerate(description_tfidf):
             correlation = pearsonr(demande_tfidf, doc)
             if correlation[0] > Newcorrelation:
@@ -51,8 +49,8 @@ class IA(Resource):
 
             product_link = f"/products/{product_id}"
 
-            resultat = f"Here's which of our jewels would best suit your request: {product_titre}. You can find it here: {product_link}"
-            return {'resultat': resultat}, 200
+            resultat = f"Here's which of our jewels would best suit your request: {product_titre}."
+            return {'resultat': resultat, 'product_link': product_link}, 200
         else:
             return {'resultat': 'Unfortunately, the current details are not sufficient to carry out a proper search. Can you give me some more details?'}, 404
 
