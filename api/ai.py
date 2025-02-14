@@ -24,7 +24,7 @@ class IA(Resource):
         product_ids = [doc["id"] for doc in products]
 
         if not descriptions:
-            return {'resultat': 'Aucun produit disponible pour le moment.'}, 404
+            return {'resultat': '<p>Aucun produit disponible pour le moment.</p>'}, 404
 
         ensemble = [requete] + descriptions
 
@@ -49,10 +49,9 @@ class IA(Resource):
 
             product_link = f"/products/{product_id}"
 
-            resultat = f"Here's which of our jewels would best suit your request: {product_titre}."
-            return {'resultat': resultat, 'product_link': product_link}, 200
+            resultat = f'<p>Here\'s which of our jewels would best suit your request: {product_titre}. <a href="{product_link}">Click here to view the product</a></p>'
+            return {'resultat': resultat}, 200
         else:
-            return {'resultat': 'Unfortunately, the current details are not sufficient to carry out a proper search. Can you give me some more details?'}, 404
-
+            return {'resultat': '<p>Unfortunately, the current details are not sufficient to carry out a proper search. Can you give me some more details?</p>'}, 404
 def init_ia_routes(api):
     api.add_namespace(ia_ns)
