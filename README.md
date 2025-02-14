@@ -3,7 +3,7 @@
   
 ## Start the app:
 
-- Front-end in React
+- [Front-end in React](https://github.com/Alexis-Gontier/Cobalt-frontend)
 - Back-end in Flask
 - BDD MongoDB
 - Swagger UI
@@ -30,19 +30,14 @@ The db is only initialized in the `express-mongo` when the request is received, 
 
 ## How to fix the known error:
 
-If you have mongo `dependency failed to start: container mongo is unhealthy`.
+If you have mongo `dependency failed to start: container mongo is unhealthy` or any error from `storage`: <br>
 Please make this: <br>
  ```bash
-docker compose down --v 
+docker compose down -v 
 ```
- + suppr the `storage` folder
-
- ```bash
-docker compose up --build
+```bash
+rm -rf storage/
 ```
- ```bash
-docker compose down --v 
-```
- ```bash
+```bash
 docker compose up --build
 ```
