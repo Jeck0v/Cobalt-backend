@@ -41,3 +41,9 @@ rm -rf storage/
 ```bash
 docker compose up --build
 ```
+## 🙇 Authors:
+- [Arnaud Fischer](https://github.com/Jeck0v)
+- [Hugo Martins](https://github.com/AkaTFL)
+- [Louis Dondey](https://github.com/Kae134)
+
+
