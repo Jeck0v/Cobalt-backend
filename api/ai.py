@@ -51,7 +51,7 @@ class IA(Resource):
 
             resultat = f'{product_link}'
             title = f'{product_titre}'
-            return {'resultat': resultat, 'title': title, 200}
+            return {'resultat': resultat, 'title': title}, 200
         else:
             return {'resultat': '<p>Unfortunately, the current details are not sufficient to carry out a proper search. Can you give me some more details?</p>'}, 404
 def init_ia_routes(api):
