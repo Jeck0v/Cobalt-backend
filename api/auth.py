@@ -50,7 +50,7 @@ class Register(Resource):
 @auth_ns.route('/login')
 class Login(Resource):
     @auth_ns.expect(login_model)
-    @auth_ns.response(200, 'Connexion réussie')
+    @auth_ns.response(200, 'Connexion réussie', user_model)
     @auth_ns.response(401, 'Identifiants invalides')
     def post(self):
         """
@@ -60,15 +60,16 @@ class Login(Resource):
         email = data.get('email')
         password = data.get('password')
 
-        # verif user exist (?)
         user = db.users.find_one({"email": email, "password": password})
         if user:
-            # Générer un token JWT
             access_token = create_access_token(identity=email)
-            return {"access_token": access_token}, 200
+            user['_id'] = str(user['_id'])
+            return {
+                "access_token": access_token,
+                "user": user
+            }, 200
         else:
             return {"msg": "Bad username or password"}, 401
-
 @auth_ns.route('/modify')
 class Modify(Resource):
     @jwt_required()
