@@ -3,7 +3,7 @@
   
 ## Start the app:
 
-- Front-end in React
+- [Front-end in React](https://github.com/Alexis-Gontier/Cobalt-frontend)
 - Back-end in Flask
 - BDD MongoDB
 - Swagger UI
